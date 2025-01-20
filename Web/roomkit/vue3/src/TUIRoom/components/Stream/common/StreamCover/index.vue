@@ -14,7 +14,7 @@
         v-if="showIcon"
         :class="showMasterIcon ? 'master-icon' : 'admin-icon'"
       >
-        <user-icon />
+        <img src="../../../../assets/imgs/room_owner.png" style="width: 20px; height: 20px;" />
       </div>
       <audio-icon
         v-if="!isScreenStream"
@@ -185,7 +185,7 @@ const isScreenStream = computed(
       width: 32px;
       height: 32px;
       margin-left: 0;
-      background-color: var(--active-color-1);
+      /* background-color: var(--active-color-1); */
       border-radius: 50%;
     }
 

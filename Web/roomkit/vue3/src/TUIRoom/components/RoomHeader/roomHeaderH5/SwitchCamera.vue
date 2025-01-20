@@ -23,6 +23,7 @@ async function handleSwitchCamera() {
 </script>
 <style scoped>
 .camera-icon {
+    padding: 5px;
   display: flex;
   background-size: cover;
 }

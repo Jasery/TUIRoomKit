@@ -1,10 +1,12 @@
+import { isPC } from "../utils/environment";
+
 const eventMap = new Map();
 
 const TIME_OUT = 300;
 
 class VueTouch {
   public dom: HTMLElement;
-  public callback: (event: TouchEvent) => void;
+  public callback: (event: TouchEvent | MouseEvent) => void;
   public isMove: boolean;
   public isInOnceTouch: boolean;
   public isLazyTap: boolean;
@@ -17,21 +19,21 @@ class VueTouch {
     this.isMove = false;
     this.isInOnceTouch = false;
 
-    el?.addEventListener('touchstart', (event: TouchEvent) => {
+    el?.addEventListener(isPC ? 'mousedown' : 'touchstart', (event: TouchEvent | MouseEvent) => {
       if (binding.modifiers.stop) {
         event.stopPropagation();
       }
       this.touchstart(event);
     });
 
-    el?.addEventListener('touchmove', (event: TouchEvent) => {
+    el?.addEventListener(isPC ? 'mousemove' : 'touchmove', (event: TouchEvent | MouseEvent) => {
       if (binding.modifiers.stop) {
         event.stopPropagation();
       }
       this.touchmove();
     });
 
-    el?.addEventListener('touchend', (event: TouchEvent) => {
+    el?.addEventListener(isPC ? 'mouseup' : 'touchend', (event: TouchEvent | MouseEvent) => {
       if (binding.modifiers.stop) {
         event.stopPropagation();
       }
@@ -39,7 +41,13 @@ class VueTouch {
     });
   }
 
-  touchstart(event: TouchEvent) {
+  touchstart(event: TouchEvent | MouseEvent) {
+    if (isPC) {
+        this.isMove = false;
+        this.isInOnceTouch = true;
+        return;
+    }
+    event =  event as TouchEvent;
     if (event.touches.length > 1 || this.isInOnceTouch) {
       return;
     }
@@ -55,7 +63,7 @@ class VueTouch {
     this.isInOnceTouch = false;
   }
 
-  touchend(event: TouchEvent) {
+  touchend(event: TouchEvent | MouseEvent) {
     if (this.isMove || !this.isInOnceTouch) {
       return;
     }

@@ -4,8 +4,11 @@
       class="swiper-item-container"
       :style="swiperStyle"
       @touchstart="handleTouchStart"
+      @mousedown="handleMouseStart"
       @touchmove="handleTouchMoveThrottle"
+      @mousemove="handleMouseMoveThrottle"
       @touchend="handleTouchEnd"
+      @mouseup="handleMouseEnd"
     >
       <slot v-if="swiperMounted"></slot>
     </div>
@@ -103,7 +106,15 @@ function handleTouchStart(event: TouchEvent) {
   touchData.y = event.changedTouches[0].pageY;
 }
 
+function handleMouseStart(event: MouseEvent) {
+  isInOnceTouch = true;
+  touchData.x = event.pageX;
+  touchData.y = event.pageY;
+}
+
 const handleTouchMoveThrottle = throttle(handleTouchMove, 200);
+
+const handleMouseMoveThrottle = throttle(handleMouseMove, 100)
 
 function handleTouchMove(event: TouchEvent) {
   if (event.touches.length > 1 || !isInOnceTouch) {
@@ -117,13 +128,45 @@ function handleTouchMove(event: TouchEvent) {
     0 - swiperRef.value.offsetWidth * activeSwiperIndex.value + offsetX;
 }
 
+function handleMouseMove(event: MouseEvent) {
+    if (!isInOnceTouch) {
+        return;
+    }
+  const offsetX = event.pageX - touchData.x;
+  translateX.value =
+    0 - swiperRef.value.offsetWidth * activeSwiperIndex.value + offsetX;
+}
+
 function handleTouchEnd(event: TouchEvent) {
   if (!isInOnceTouch) {
     return;
   }
   isInOnceTouch = false;
   const offsetX = event.changedTouches[0].pageX - touchData.x;
-  if (Math.abs(offsetX) > swiperRef.value.offsetWidth / 5) {
+  if (
+    Math.abs(event.changedTouches[0].pageX - touchData.x) >
+    swiperRef.value.offsetWidth / 5
+  ) {
+    if (offsetX < 0 && activeSwiperIndex.value < swiperItemNumber.value - 1) {
+      activeSwiperIndex.value = activeSwiperIndex.value + 1;
+    }
+    if (offsetX > 0 && activeSwiperIndex.value >= 1) {
+      activeSwiperIndex.value = activeSwiperIndex.value - 1;
+    }
+  }
+  translateX.value = 0 - swiperRef.value.offsetWidth * activeSwiperIndex.value;
+}
+
+function handleMouseEnd(event: MouseEvent) {
+  if (!isInOnceTouch) {
+    return;
+  }
+  isInOnceTouch = false;
+  const offsetX = event.pageX - touchData.x;
+  if (
+    Math.abs(event.pageX - touchData.x) >
+    swiperRef.value.offsetWidth / 5
+  ) {
     if (offsetX < 0 && activeSwiperIndex.value < swiperItemNumber.value - 1) {
       activeSwiperIndex.value = activeSwiperIndex.value + 1;
     }

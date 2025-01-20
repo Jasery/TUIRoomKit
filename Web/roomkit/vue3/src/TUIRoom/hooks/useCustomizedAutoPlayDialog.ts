@@ -21,16 +21,16 @@ export default function () {
     trtcCloud.on('onAutoPlayFailed', () => {
       if (!isShowAutoPlayDialog) {
         isShowAutoPlayDialog = true;
-        TUIMessageBox({
-          title: t('Attention'),
-          message: t(
-            'Audio playback failed. Click the "Confirm" to resume playback'
-          ),
-          confirmButtonText: t('Confirm'),
-          callback: () => {
-            isShowAutoPlayDialog = false;
-          },
-        });
+        // TUIMessageBox({
+        //   title: t('Attention'),
+        //   message: t(
+        //     'Audio playback failed. Click the "Confirm" to resume playback'
+        //   ),
+        //   confirmButtonText: t('Confirm'),
+        //   callback: () => {
+        //     isShowAutoPlayDialog = false;
+        //   },
+        // });
       }
     });
   });

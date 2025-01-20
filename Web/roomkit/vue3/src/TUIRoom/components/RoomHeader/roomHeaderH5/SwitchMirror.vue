@@ -37,5 +37,6 @@ function toogleMirrorStatus() {
 <style lang="scss" scoped>
 .mirror-icon {
   display: flex;
+  padding: 5px;
 }
 </style>

@@ -10,7 +10,9 @@
         :icon="ChatIcon"
         :is-active="sidebarName === 'chat'"
         @click-icon="toggleChatSidebar"
-      />
+      >
+        <img src="../../assets/imgs/icon-chat.png" style="width: 24px; height: 24px;" />
+       </icon-button>
     </tui-badge>
   </div>
 </template>

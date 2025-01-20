@@ -13,10 +13,11 @@
       <div class="role-info">
         <svg-icon
           v-if="isTargetUserRoomOwner || isTargetUserAdmin"
-          :icon="UserIcon"
           :color="isTargetUserAdmin ? '#F06C4B' : '#4791FF'"
           :class="isTargetUserAdmin ? 'admin-icon' : 'master-icon'"
-        />
+        >
+          <img src="../../../assets/imgs/room_owner.png" style="width: 20px; height: 20px;" />
+        </svg-icon>
         <div
           :class="`user-extra-info ${isTargetUserAdmin ? 'user-extra-info-admin' : ''}`"
         >
@@ -29,10 +30,15 @@
       <svg-icon
         v-for="(item, index) in iconList"
         :key="index"
-        :icon="item.icon"
+        :icon="typeof item.icon === 'string' ? undefined : item.icon"
         :class="['state-icon', { 'disable-icon': item.disable }]"
-        :size="item.size"
-      />
+        :size="20"
+      >
+        <img v-if="item.icon === 'AudioOpenIcon'" src="../../../assets/imgs/room_un_mute_audio.png" style="width: 20px; height: 20px;" />
+        <img v-if="item.icon === 'AudioCloseIcon'" src="../../../assets/imgs/room_mute_audio_red.png" style="width: 20px; height: 20px;" />
+        <img v-if="item.icon === 'VideoOpenIcon'" src="../../../assets/imgs/room_un_mute_video.png" style="width: 20px; height: 20px;" />
+        <img v-if="item.icon === 'VideoCloseIcon'" src="../../../assets/imgs/room_mute_video_red.png" style="width: 20px; height: 20px;" />
+        </svg-icon>
     </div>
     <member-invite
       class="member-invite"
@@ -112,19 +118,19 @@ const iconList = computed(() => {
   }
   if (!isAudienceRole.value) {
     list.push({
-      icon: props.userInfo.hasAudioStream ? AudioOpenIcon : AudioCloseIcon,
+      icon: props.userInfo.hasAudioStream ? 'AudioOpenIcon' : 'AudioCloseIcon',
     });
     list.push({
-      icon: props.userInfo.hasVideoStream ? VideoOpenIcon : VideoCloseIcon,
+      icon: props.userInfo.hasVideoStream ? 'VideoOpenIcon' : 'VideoCloseIcon',
     });
   }
   if (isAudienceRole.value && !props.userInfo.isUserApplyingToAnchor) {
-    list.push({ icon: AudioCloseIcon, disable: true });
-    list.push({ icon: VideoCloseIcon, disable: true });
+    list.push({ icon: 'AudioCloseIcon', disable: true });
+    list.push({ icon: 'VideoCloseIcon', disable: true });
   }
-  if (isAudienceRole.value && props.userInfo.isUserApplyingToAnchor) {
-    list.push({ icon: ApplyActiveIcon, size: 20 });
-  }
+//   if (isAudienceRole.value && props.userInfo.isUserApplyingToAnchor) {
+//     list.push({ icon: ApplyActiveIcon, size: 20 });
+//   }
   return list;
 });
 </script>
@@ -193,7 +199,7 @@ const iconList = computed(() => {
         font-size: 14px;
         font-weight: 400;
         line-height: 20px;
-        color: var(--active-color-2);
+        color: #00b68f;
       }
 
       .user-extra-info-admin {
@@ -219,9 +225,10 @@ const iconList = computed(() => {
     display: flex;
     align-items: center;
     height: 100%;
+    column-gap: 4px;
     color: var(--icon-color);
 
-    .state-icon {
+    .state-icon .member-invite {
       margin-left: 16px;
     }
 

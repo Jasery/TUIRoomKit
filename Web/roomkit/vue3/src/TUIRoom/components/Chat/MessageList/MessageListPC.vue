@@ -144,8 +144,8 @@ onUnmounted(() => {
       .message-body {
         min-width: 24px;
         padding: 10px;
-        color: var(--host-font-color);
-        background-color: var(--active-color-1);
+        color: #333333;
+        background-color: #ceeee5;
         border-radius: 8px;
       }
     }
@@ -167,8 +167,8 @@ onUnmounted(() => {
       padding: 10px;
       font-size: 14px;
       font-weight: 400;
-      color: var(--user-font-color);
-      background-color: var(--user-chat-color);
+      color: #333333;
+      background-color: #ffffff;
       border-radius: 8px;
     }
   }
@@ -178,7 +178,7 @@ onUnmounted(() => {
   width: 100%;
   height: 100%;
   padding: 10px 23px 10px 32px;
-  background-color: var(--message-list-color-h5);
+  background-color: #eeeeee;
 
   .message-list {
     height: 100%;
@@ -217,8 +217,8 @@ onUnmounted(() => {
           padding: 7px;
           font-size: 14px;
           font-weight: 400;
-          color: #fff;
-          background-color: #4791ff;
+        color: #333333;
+        background-color: #ceeee5;
           border-radius: 8px;
         }
       }
@@ -231,7 +231,7 @@ onUnmounted(() => {
         font-style: normal;
         font-weight: 500;
         line-height: 14px;
-        color: #ff7200;
+        color: #999999;
         text-overflow: ellipsis;
         white-space: nowrap;
       }
@@ -241,8 +241,8 @@ onUnmounted(() => {
         padding: 7px;
         font-size: 14px;
         font-weight: 400;
-        color: #fff;
-        background-color: var(--message-body-h5);
+        color: #333333;
+        background-color: #ffffff;
         border-radius: 8px;
       }
     }

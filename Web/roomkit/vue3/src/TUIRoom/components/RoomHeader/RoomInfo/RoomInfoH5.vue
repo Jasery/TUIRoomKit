@@ -3,10 +3,10 @@
     <div class="title-container" @click="toggleShowRoomInfoStatus">
       <div class="title-text">
         <span class="text">{{ conferenceTitle }}</span>
-        <svg-icon
+        <!-- <svg-icon
           :class="['arrow-icon', { 'arrow-down-icon': arrowDirection }]"
           :icon="Arrow"
-        />
+        /> -->
       </div>
       <room-time class="text" />
     </div>
@@ -25,7 +25,7 @@
             <div
               v-if="item.isShowCopyIcon && item.visible"
               class="copy-container"
-              @click="onCopy(item.copyLink)"
+              @click="handleCopy"
             >
               <svg-icon class="copy" :icon="copyIcon" />
             </div>
@@ -48,6 +48,7 @@ import SvgIcon from '../../common/base/SvgIcon.vue';
 import Arrow from '../../common/icons/ArrowUpIcon.vue';
 import copyIcon from '../../common/icons/CopyIcon.vue';
 import RoomTime from '../../common/RoomTime.vue';
+import { watch } from 'vue';
 
 const {
   t,
@@ -61,6 +62,21 @@ const {
   toggleShowRoomInfoStatus,
   onCopy,
 } = useRoomInfo();
+
+defineExpose({
+    toggleShowRoomInfoStatus
+})
+
+const emit = defineEmits(['show-room-info', 'copy-room-link']);
+
+watch(isShowRoomInfo, () => {
+    emit('show-room-info', isShowRoomInfo.value)
+})
+
+const handleCopy = () => {
+    emit('copy-room-link')
+}
+
 </script>
 
 <style lang="scss" scoped>

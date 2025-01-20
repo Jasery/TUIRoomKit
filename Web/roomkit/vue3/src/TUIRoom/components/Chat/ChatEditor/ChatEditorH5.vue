@@ -15,6 +15,9 @@
         @keyup.enter="sendMessage"
       />
     </div>
+    <div class="send-btn" @click="sendMessage">
+        发送
+    </div>
   </div>
 </template>
 
@@ -38,14 +41,17 @@ const {
   justify-content: center;
   width: 100vw;
   padding-bottom: 5px;
+  padding: 0 10px;
+  column-gap: 10px;
 
   .input-content {
     box-sizing: border-box;
+    flex: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 90%;
-    height: 34px;
+    /* width: 90%; */
+    height: 36px;
     font-family: 'PingFang SC';
     font-size: 16px;
     font-style: normal;
@@ -54,9 +60,10 @@ const {
     color: #676c80;
     caret-color: var(--caret-color);
     resize: none;
-    background: var(--chat-editor-input-color-h5);
+    background: #ffffff;
     border: none;
     border-radius: 8px;
+    padding: 0 12px;
 
     .chat-emoji {
       display: flex;
@@ -66,7 +73,8 @@ const {
 
     .content-bottom-input {
       box-sizing: border-box;
-      width: 84%;
+      /* width: 87%; */
+      flex: auto;
       height: 34px;
       padding-left: 10px;
       font-family: 'PingFang SC';
@@ -77,7 +85,8 @@ const {
       color: #676c80;
       caret-color: var(--caret-color);
       resize: none;
-      background: var(--chat-editor-input-color-h5);
+      /* background: var(--chat-editor-input-color-h5); */
+      background-color: #ffffff;
       border: none;
       border-radius: 8px;
 
@@ -95,7 +104,17 @@ const {
       }
     }
   }
-
+  .send-btn {
+    height: 36px;
+    width: 68px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #00b68f;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #ffffff;
+  }
   &.disable {
     .chat-emoji {
       pointer-events: none;

@@ -5,7 +5,7 @@
     class="member-item-container"
   >
     <member-info
-      :show-state-icon="props.userInfo.isInRoom"
+      :show-state-icon="!!props.userInfo.isInRoom"
       :user-info="props.userInfo"
     />
     <member-control

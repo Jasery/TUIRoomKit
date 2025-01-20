@@ -13,7 +13,7 @@ export const isApp = getPlatform() === 'app';
 export const isUniFrameWork = typeof uni !== 'undefined';
 
 // H5, small programs, apps are considered mobile products, if you need to unify the mobile UI style, you can directly use isMobile to control
-export const isMobile = isH5 || isWeChat || isApp;
+export const isMobile = true; //isH5 || isWeChat || isApp;
 
 export const isElectron =
   navigator.userAgent?.toLowerCase().indexOf(' electron/') > -1;

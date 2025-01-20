@@ -1,5 +1,8 @@
 <template>
   <div class="footer-container">
+    <manage-member-control
+      v-tap="() => handleControlClick('manageMemberControl')"
+    />
     <audio-control
       v-if="!isAudience || isAdmin"
       v-tap="() => handleControlClick('audioControl')"
@@ -8,8 +11,13 @@
       v-if="!isAudience || isAdmin"
       v-tap="() => handleControlClick('videoControl')"
     />
+    <!-- <icon-button
+      :is-active="false"
+      title="共享屏幕"
+    >
+        <img src="@/assets/images/icon-screen.png" style="width: 24px; height: 24px;" />
+    </icon-button> -->
     <chat-control
-      v-if="!roomStore.isSpeakAfterTakingSeatMode"
       v-tap="() => handleControlClick('chatControl')"
     />
     <master-apply-control
@@ -20,13 +28,17 @@
       v-if="roomStore.isSpeakAfterTakingSeatMode && !isMaster"
       v-tap="() => handleControlClick('MemberApplyControl')"
     />
-    <manage-member-control
-      v-tap="() => handleControlClick('manageMemberControl')"
-    />
-    <more-control
+    <!-- <icon-button
+      :is-active="true"
+      title="邀请"
+      @click-icon="() => emit('show-info')"
+    >
+        <img src="@/assets/images/room_invite.png" style="width: 24px; height: 24px;" />
+    </icon-button> -->
+    <!-- <more-control
       v-tap="() => handleControlClick('moreControl')"
       @show-overlay="handleShowOverlay"
-    />
+    /> -->
   </div>
 </template>
 <script setup lang="ts">
@@ -45,7 +57,8 @@ import useRoomFooter from './useRoomFooterHooks';
 
 const { roomStore, isMaster, isAdmin, isAudience } = useRoomFooter();
 
-const emit = defineEmits(['show-overlay']);
+
+const emit = defineEmits(['show-overlay', 'click', 'show-info']);
 
 function handleControlClick(name: string) {
   bus.emit('experience-communication', name);
@@ -54,6 +67,11 @@ function handleControlClick(name: string) {
 function handleShowOverlay(data: { name: string; visible: boolean }) {
   emit('show-overlay', data);
 }
+
+function handleTouchStart() {
+  emit('click');
+}
+
 </script>
 
 <style scoped>

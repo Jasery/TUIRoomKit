@@ -13,14 +13,17 @@
       class="video-control-container"
     >
       <icon-button
-        :title="t('Camera')"
+        :title="isMuted ? '开启视频' : '关闭视频'"
         :has-more="hasMore"
         :disabled="isDisabled"
         :is-not-support="!isSupportVideoMedia"
         @click-icon="handleClickIcon"
         @click-more="handleMore"
       >
-        <svg-icon :icon="icon" />
+        <svg-icon>
+            <img v-if="!isMuted" src="../../assets/imgs/room_camera_on.png" style="width: 24px; height: 24px;" />
+            <img v-if="isMuted" src="../../assets/imgs/room_camera_off.png" style="width: 24px; height: 24px;" />
+        </svg-icon>
       </icon-button>
       <video-setting-tab
         v-show="showVideoSettingTab"

@@ -59,6 +59,7 @@ const createInstance = ({ type, message, duration = 3000 }: MessageProps) => {
     zIndex: indexManager().nextZIndex(),
   });
   render(vNode, container);
+  return onRemove;
 };
 
 export default createInstance;

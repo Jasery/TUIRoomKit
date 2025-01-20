@@ -4,9 +4,10 @@
       <icon-button
         v-tap="showMore"
         :is-active="sidebarName === 'more'"
-        :title="t('More')"
-        :icon="ExtensionIcon"
-      />
+        :title="'展开'"
+      >
+      <img src="../../../assets/imgs/room_drop.png" style="width: 24px; height: 24px;" />
+        </icon-button>
     </div>
     <div v-if="showMoreContent" ref="moreContentRef" class="show-more-content">
       <div class="control-compent">

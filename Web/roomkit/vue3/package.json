@@ -1,5 +1,5 @@
 {
-  "name": "@tencentcloud/roomkit-web-vue3",
+  "name": "roomkit-web-vue3",
   "version": "2.8.2",
   "main": "./lib/index.js",
   "module": "./es/index.mjs",

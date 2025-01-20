@@ -5,7 +5,14 @@
     ref="roomRef"
     :class="tuiRoomClass"
   >
-    <room-header v-show="showRoomTool && showHeaderTool" class="header" />
+    <room-header
+      v-show="showRoomTool && showHeaderTool"
+      class="header"
+      ref="headerRef"
+      @click="handleHeaderClick"
+      @show-room-info="onShowRoomInfo"
+      @copy-room-link="emit('copy-room-link', $event)"
+    />
     <room-content
       ref="roomContentRef"
       v-tap.lazy="handleRoomContentTap"
@@ -16,6 +23,8 @@
       v-show="showRoomTool"
       class="footer"
       @show-overlay="handleShowOverlay"
+      @click="handleFooterClick"
+      @show-info="handleRoomInfo"
     />
     <room-sidebar />
     <room-setting />
@@ -98,6 +107,10 @@ const overlayMap = ref<{
 const conferenceShow = computed(
   () => props.displayMode === 'permanent' || !!basicStore.roomId
 );
+const showRoomInfo = ref(false);
+const onShowRoomInfo  = (val: boolean) => {
+    showRoomInfo.value = val;
+}
 
 useCustomizedAutoPlayDialog();
 useTRTCDetect();
@@ -123,6 +136,9 @@ const emit = defineEmits([
   'on-kicked-out-of-room',
   'on-kicked-off-line',
   'on-userSig-expired',
+  'footer-click',
+  'header-click',
+  'copy-room-link',
 ]);
 
 const basicStore = useBasicStore();
@@ -347,6 +363,22 @@ const onKickedOffLine = (eventInfo: { message: string }) => {
   const { message } = eventInfo;
   emit('on-kicked-off-line', { message });
 };
+
+const handleFooterClick = () => {
+    emit('footer-click');
+}
+
+const handleHeaderClick = () => {
+    emit('header-click');
+}
+
+const headerRef = ref();
+
+const handleRoomInfo = () => {
+    console.log('into handleRoomInfo', headerRef.value);
+    headerRef.value?.showRoomInfo();
+}
+
 </script>
 
 <style lang="scss">

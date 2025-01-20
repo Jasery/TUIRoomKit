@@ -1,5 +1,5 @@
 <template>
-  <popup v-if="showSideBar" :title="title" class="sidebar-container-mobile">
+  <popup v-if="showSideBar" :title="title" class="sidebar-container-mobile" :theme="sidebarName === 'chat' ? 'light' : 'dark'">
     <template #sidebarContent>
       <div style="height: 100%">
         <chat v-if="sidebarName === 'chat'" />

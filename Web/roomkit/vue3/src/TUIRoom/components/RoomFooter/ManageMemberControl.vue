@@ -6,9 +6,10 @@
     <icon-button
       :is-active="sidebarName === 'manage-member'"
       :title="memberTitle"
-      :icon="ManageMemberIcon"
       @click-icon="toggleMangeMemberSidebar"
-    />
+    >
+        <img src="../../assets/imgs/room_member.png" style="width: 24px; height: 24px;" />
+    </icon-button>
   </div>
 </template>
 

@@ -34,7 +34,7 @@
         v-if="showIcon"
         :class="showMasterIcon ? 'master-icon' : 'admin-icon'"
       >
-        <svg-icon :icon="UserIcon" />
+        <img src="../../../../assets/imgs/room_owner.png" style="width: 20px; height: 20px;" />
       </div>
       <audio-icon
         v-if="!isScreenStream"
@@ -322,7 +322,7 @@ function handleScaleChange(event: {
       width: 32px;
       height: 32px;
       margin-left: 0;
-      background-color: var(--active-color-1);
+      /* background-color: var(--active-color-1); */
     }
 
     .admin-icon {

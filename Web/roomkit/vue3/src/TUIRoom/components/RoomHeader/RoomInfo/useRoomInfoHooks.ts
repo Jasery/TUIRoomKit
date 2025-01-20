@@ -66,14 +66,14 @@ export default function useRoomInfo() {
       isShowCopyIcon: true,
       visible: password.value,
     },
-    {
-      id: 5,
-      title: 'Room Link',
-      content: inviteLink.value,
-      copyLink: inviteLink.value,
-      isShowCopyIcon: true,
-      visible: isRoomLinkVisible.value && roomLinkConfig.visible,
-    },
+    // {
+    //   id: 5,
+    //   title: 'Room Link',
+    //   content: inviteLink.value,
+    //   copyLink: inviteLink.value,
+    //   isShowCopyIcon: true,
+    //   visible: isRoomLinkVisible.value && roomLinkConfig.visible,
+    // },
   ]);
 
   function toggleShowRoomInfoStatus() {

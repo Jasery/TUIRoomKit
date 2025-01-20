@@ -11,12 +11,12 @@
           :streamInfo="enlargeStream"
           :support-touch-scale="isEnlargeScreenStream"
         />
-        <single-stream-view
+        <!-- <single-stream-view
           v-if="floatStream"
           :class="['float-stream', { 'show-room-tool': showRoomTool }]"
           :style="floatStreamStyle"
           :streamInfo="floatStream"
-        />
+        /> -->
       </TuiSwiperItem>
       <template v-if="showEqualPointsPage">
         <TuiSwiperItem
@@ -247,6 +247,15 @@ function handleStreamViewDblclick(stream: StreamInfo) {
   swiperActiveIndex.value = 0;
   fixedStream.value = stream;
 }
+watch(
+    () => equalPointsLayoutStreamList.value.length,
+    (val) => {
+      if (val < 2) {
+        swiperActiveIndex.value = 0
+      }
+    }
+)
+
 </script>
 
 <style lang="scss">

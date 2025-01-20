@@ -1,5 +1,5 @@
 <template>
-  <div class="popup-container">
+  <div :class="['popup-container', theme]">
     <div class="popup-main-header">
       <span v-tap="handleClose" class="icon-container">
         <svg-icon class="close-icon" :icon="ArrowStrokeBackIcon" />
@@ -22,6 +22,7 @@ import vTap from '../../../directives/vTap';
 
 interface Props {
   title: string;
+  theme?: string;
 }
 defineProps<Props>();
 
@@ -82,11 +83,33 @@ function handleClose() {
   }
 
   .popup-main-footer {
-    position: sticky;
+    position: fix;
     bottom: 0;
     width: 100%;
     height: auto;
     padding-top: 10px;
+    padding-bottom: 20px;
   }
+
+  &.light {
+    .popup-main-header {
+        background-color: #eeeeee;
+
+        .icon-container {
+        /* background-color: black; */
+            color: black;
+        }
+
+        .sidebar-title {
+        color: #333333;
+        }
+
+    }
+
+    .popup-main-footer {
+        background-color: #f5f5f5;
+    }
+  }
+
 }
 </style>

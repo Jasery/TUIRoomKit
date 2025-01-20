@@ -338,6 +338,7 @@ onBeforeUnmount(() => {
   .attention {
     position: absolute;
     bottom: 70px;
+    right: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -348,7 +349,7 @@ onBeforeUnmount(() => {
     &::after {
       position: absolute;
       top: 100%;
-      left: 10%;
+      right: 10%;
       display: block;
       content: '';
       border: 5px solid transparent;

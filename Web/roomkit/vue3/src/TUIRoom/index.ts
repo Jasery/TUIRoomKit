@@ -15,6 +15,7 @@ export * from './components/common/base/index';
 export * from './services/manager/scheduleConferenceManager';
 export * from './services/manager/configManager';
 export { createComparator, combineComparators } from './utils/utils';
+export * from './utils/adapter';
 
 export {
   ConferenceMainView,

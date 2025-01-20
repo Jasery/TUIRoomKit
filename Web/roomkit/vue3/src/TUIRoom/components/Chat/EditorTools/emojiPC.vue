@@ -75,7 +75,7 @@ const handleClickOutsideEmojiToobar = () => {
     height: 204px;
     padding: 10px;
     overflow-y: auto;
-    background-color: var(--background-color-8);
+    background-color: #ffffff;
     border-radius: 8px;
     box-shadow: var(--emoji-box-shadow);
 

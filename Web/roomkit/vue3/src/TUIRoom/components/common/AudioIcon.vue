@@ -3,7 +3,10 @@
     <div class="audio-level-container">
       <div class="audio-level" :style="audioLevelStyle"></div>
     </div>
-    <svg-icon class="audio-icon" :icon="icon" />
+    <svg-icon class="audio-icon">
+        <img v-if="!isMuted" src="../../assets/imgs/room_mic_on.png" style="width: 24px; height: 24px;" />
+        <img v-if="isMuted" src="../../assets/imgs/room_mic_off.png" style="width: 24px; height: 24px;" />
+    </svg-icon>
   </div>
 </template>
 

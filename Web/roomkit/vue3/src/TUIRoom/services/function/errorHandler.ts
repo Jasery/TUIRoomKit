@@ -41,6 +41,9 @@ export class ErrorHandler {
         message =
           'The room does not exist, please confirm the room number or create a room!';
         break;
+      case TUIErrorCode.ERR_ROOM_USER_FULL:
+        message = '房间已满员，请稍后再进入';
+        break;
       default:
         message = 'Failed to enter the meeting';
     }
