@@ -41,17 +41,19 @@
         />
       </div>
       <template #footer>
-        <tui-button class="button" size="default" @click="closeUserNameEditor">
-          {{ t('Cancel') }}
-        </tui-button>
-        <tui-button
-          class="button"
-          size="default"
+        <TUIButton
+          @click="closeUserNameEditor"
           type="primary"
+          style="min-width: 88px"
+        >
+          {{ t('Cancel') }}
+        </TUIButton>
+        <TUIButton
           @click="saveUserName(tempUserName)"
+          style="min-width: 88px"
         >
           {{ t('Save') }}
-        </tui-button>
+        </TUIButton>
       </template>
     </Dialog>
   </div>
@@ -61,7 +63,7 @@ import TUIRoomEngine from '@tencentcloud/tuiroom-engine-js';
 import { defineProps, defineEmits } from 'vue';
 import Dialog from '../../common/base/Dialog';
 import SvgIcon from '../../common/base/SvgIcon.vue';
-import TuiButton from '../../common/base/Button.vue';
+import { TUIButton } from '@tencentcloud/uikit-base-component-vue3';
 import TuiInput from '../../common/base/Input';
 import ArrowStrokeSelectDownIcon from '../../common/icons/ArrowStrokeSelectDownIcon.vue';
 import useUserInfo from './useUserInfoHooks';
@@ -118,17 +120,6 @@ async function saveUserName(userName: string) {
 }
 </script>
 <style lang="scss" scoped>
-.tui-theme-white .user-control-container {
-  --filter-color: drop-shadow(0px 0px 4px rgba(32, 77, 141, 0.03))
-    drop-shadow(0px 4px 10px rgba(32, 77, 141, 0.06))
-    drop-shadow(0px 1px 14px rgba(32, 77, 141, 0.05));
-}
-
-.tui-theme-black .user-control-container {
-  --filter-color: drop-shadow(0px 8px 40px rgba(23, 25, 31, 0.6))
-    drop-shadow(0px 4px 12px rgba(23, 25, 31, 0.4));
-}
-
 .user-info-container {
   position: relative;
 
@@ -148,9 +139,9 @@ async function saveUserName(userName: string) {
       margin-left: 10px;
       overflow: hidden;
       font-size: 16px;
-      color: var(--font-color);
       text-overflow: ellipsis;
       white-space: nowrap;
+      color: var(--text-color-primary);
     }
 
     .down-icon {
@@ -169,8 +160,10 @@ async function saveUserName(userName: string) {
     right: 0;
     min-width: 100px;
     padding: 10px;
-    background: #fff;
-    filter: var(--filter-color);
+    background: var(--bg-color-dialog);
+    filter: drop-shadow(0px 0px 4px var(--uikit-color-black-8))
+      drop-shadow(0px 4px 10px var(--uikit-color-black-8))
+      drop-shadow(0px 1px 14px var(--uikit-color-black-8));
     border-radius: 8px;
 
     &::before {
@@ -181,7 +174,7 @@ async function saveUserName(userName: string) {
       content: '';
       border-top: 10px solid transparent;
       border-right: 10px solid transparent;
-      border-bottom: 10px solid #fff;
+      border-bottom: 10px solid var(--bg-color-dialog);
       border-left: 10px solid transparent;
     }
 
@@ -199,7 +192,7 @@ async function saveUserName(userName: string) {
     .user-control-item-head {
       height: 20px;
       font-size: 14px;
-      color: #4f586b;
+      color: var(--text-color-secondary);
       text-align: center;
       cursor: pointer;
     }
@@ -216,9 +209,5 @@ async function saveUserName(userName: string) {
     width: auto;
     margin-left: 16px;
   }
-}
-
-.button {
-  margin-left: 12px;
 }
 </style>

@@ -5,10 +5,12 @@
     />
     <audio-control
       v-if="!isAudience || isAdmin"
+      :display-mode="MediaSettingDisplayMode.Icon"
       v-tap="() => handleControlClick('audioControl')"
     />
-    <video-control
+    <video-setting
       v-if="!isAudience || isAdmin"
+      :display-mode="MediaSettingDisplayMode.Icon"
       v-tap="() => handleControlClick('videoControl')"
     />
     <!-- <icon-button
@@ -43,8 +45,11 @@
 </template>
 <script setup lang="ts">
 import { defineEmits } from 'vue';
-import AudioControl from '../AudioControl.vue';
-import VideoControl from '../VideoControl.vue';
+import {
+  AudioSetting,
+  VideoSetting,
+  MediaSettingDisplayMode,
+} from '../../../core';
 import ManageMemberControl from '../ManageMemberControl.vue';
 import ChatControl from '../ChatControl.vue';
 import MasterApplyControl from '../ManageStageControl.vue';
@@ -74,7 +79,7 @@ function handleTouchStart() {
 
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .footer-container {
   position: absolute;
   bottom: 0;
@@ -84,7 +89,7 @@ function handleTouchStart() {
   justify-content: space-between;
   width: 100%;
   padding: 0.7rem;
-  background-color: var(--background-color-2);
-  box-shadow: 0 -8px 30px var(--footer-shadow-color);
+  background-color: var(--bg-color-topbar);
+  box-shadow: 0 -8px 30px var(--uikit-color-black-8);
 }
 </style>

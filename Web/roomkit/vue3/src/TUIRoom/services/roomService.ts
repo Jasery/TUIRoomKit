@@ -1,6 +1,7 @@
 import mitt from 'mitt';
 import useGetRoomEngine from '../hooks/useRoomEngine';
 import { EventType, IRoomService, RoomInitData, RoomParam } from './types';
+
 import TUIRoomEngine, {
   TRTCVideoFillMode,
   TRTCVideoMirrorType,
@@ -12,7 +13,6 @@ import TUIRoomEngine, {
 import { useBasicStore } from '../stores/basic';
 import { UserInfo, useRoomStore } from '../stores/room';
 import { useChatStore } from '../stores/chat';
-import useDeviceManager from '../hooks/useDeviceManager';
 import logger from '../utils/common/logger';
 import { isMobile } from '../utils/environment';
 import i18n from '../locales';
@@ -41,8 +41,10 @@ import { ConferenceInvitationManager } from './manager/conferenceInvitationManag
 import { DataReportManager } from './manager/dataReportManager';
 import { ErrorHandler } from './function/errorHandler';
 import { ChatManager } from './manager/chatManager';
+import { WidgetsManager } from './manager/widgetsManager';
 import { TUILogin } from '@tencentcloud/tui-core';
 import { AITask } from './function/aiTask';
+import initWidgets from '../components/common/widgets';
 
 const { t } = i18n.global;
 
@@ -72,6 +74,7 @@ export class RoomService implements IRoomService {
   public chatManager: ChatManager = new ChatManager(this);
   public aiTask: AITask = new AITask(this);
   public trackingManager: TrackingManager = new TrackingManager();
+  public widgetsManager: WidgetsManager = new WidgetsManager(this);
 
   get basicStore() {
     return useBasicStore();
@@ -146,10 +149,6 @@ export class RoomService implements IRoomService {
       document.getElementById('roomContainer') ||
       document.body
     );
-  }
-
-  public initMediaDeviceList() {
-    useDeviceManager({ listenForDeviceChange: true });
   }
 
   public bindRoomEngineEvents() {
@@ -348,12 +347,6 @@ export class RoomService implements IRoomService {
     isDisable: boolean;
   }) {
     const { isDisable } = eventInfo;
-    if (
-      isDisable !== this.roomStore.isCameraDisableForAllUser &&
-      this.roomStore.localUser.userRole === TUIRole.kGeneralUser
-    ) {
-      this.roomStore.setCanControlSelfVideo(!isDisable);
-    }
     this.handleVideoStateChange(isDisable);
     this.roomStore.setDisableCameraForAllUserByAdmin(isDisable);
   }
@@ -382,6 +375,8 @@ export class RoomService implements IRoomService {
 
   private async onUserInfoChanged(eventInfo: { userInfo: UserInfo }) {
     const { userId, nameCard } = eventInfo.userInfo;
+    const oldNameCard = this.roomStore.userInfoObj[userId]?.nameCard;
+    if (oldNameCard === nameCard) return;
     this.roomStore.updateUserInfo({ userId, nameCard });
   }
 
@@ -390,12 +385,6 @@ export class RoomService implements IRoomService {
     isDisable: boolean;
   }) {
     const { isDisable } = eventInfo;
-    if (
-      isDisable !== this.roomStore.isMicrophoneDisableForAllUser &&
-      this.roomStore.localUser.userRole === TUIRole.kGeneralUser
-    ) {
-      this.roomStore.setCanControlSelfAudio(!isDisable);
-    }
     this.handleAudioStateChange(isDisable);
     this.roomStore.setDisableMicrophoneForAllUserByAdmin(isDisable);
   }
@@ -440,6 +429,7 @@ export class RoomService implements IRoomService {
   }
 
   public async initRoomKit(option: RoomInitData) {
+    initWidgets(this.widgetsManager);
     this.storeInit(option);
     const { sdkAppId, userId, userSig } = option;
     TUILogin.login({

@@ -5,14 +5,18 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue';
 import { TUIConversationService } from '@tencentcloud/chat-uikit-engine';
-
 import Server from '../ChatKit/server';
 import { roomService, Theme, LanguageOption } from '../../../services';
 import { hideTUIChatFeatures } from '../ChatKit/components/TUIChat/config';
 import TUIChatServer from '../ChatKit/components/TUIChat/server';
 
 import { useBasicStore } from '../../../stores/basic';
+import { useUIKit } from '@tencentcloud/uikit-base-component-vue2';
+
+const { theme, setTheme } = useUIKit();
+
 import TUIChat from '../ChatKit/components/TUIChat/index.vue';
 
 const basicStore = useBasicStore();
@@ -42,8 +46,13 @@ new TUIChatServer();
 
 TUIConversationService.switchConversation(currentRoomId);
 hideTUIChatFeatures(defaultHideFeaturesButtons);
-roomService.setTheme(basicStore.defaultTheme as Theme);
 roomService.setLanguage(basicStore.lang as LanguageOption);
+
+onMounted(() => {
+  theme.value
+    ? setTheme(theme.value)
+    : roomService.setTheme(basicStore.defaultTheme as Theme);
+});
 </script>
 
 <style lang="scss" scoped>

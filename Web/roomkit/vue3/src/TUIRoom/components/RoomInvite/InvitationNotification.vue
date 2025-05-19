@@ -39,24 +39,24 @@
         @click="handleRejectInvitation"
         >{{ t('Not joining for now') }}
       </span>
-      <tui-button
-        class="button-item"
-        style="width: 110px"
+      <TUIButton
         @click="handleEnterRoom"
+        type="primary"
+        style="min-width: 88px"
       >
         <svg-icon class="icon" :icon="EnterRoomIcon" />
         <span class="button-text">{{ t('Enter Now') }}</span>
-      </tui-button>
+      </TUIButton>
     </div>
   </div>
 </template>
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, defineEmits } from 'vue';
+import { TUIButton } from '@tencentcloud/uikit-base-component-vue3';
 import Avatar from '../common/Avatar.vue';
 import { useI18n } from '../../locales';
 import EnterRoomIcon from '../common/icons/EnterRoomIcon.vue';
 import SvgIcon from '../common/base/SvgIcon.vue';
-import TuiButton from '../common/base/Button.vue';
 import {
   TUIConferenceInvitationManagerEvents,
   TUIInvitation,
@@ -163,9 +163,9 @@ onUnmounted(() => {
   top: 40px;
   right: 20px;
   padding: 20px 30px 10px 20px;
-  background-color: var(--white-color);
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--uikit-color-black-1);
   border-radius: 15px;
+  background-color: var(--bg-color-dialog);
 
   .invitation-notification-inviter {
     display: flex;
@@ -175,9 +175,9 @@ onUnmounted(() => {
       overflow: hidden;
       font-size: 14px;
       font-weight: 400;
-      color: var(--font-color-4);
       text-overflow: ellipsis;
       white-space: nowrap;
+      color: var(--text-color-primary);
     }
 
     .avatar {
@@ -197,9 +197,9 @@ onUnmounted(() => {
       overflow: hidden;
       font-size: 14px;
       font-weight: 400;
-      color: rgba(79, 88, 107, 1);
       text-overflow: ellipsis;
       white-space: nowrap;
+      color: var(--text-color-secondary);
     }
   }
 
@@ -207,7 +207,7 @@ onUnmounted(() => {
     display: block;
     width: 1px;
     height: 14px;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: var(--uikit-color-black-1);
   }
 
   .invitation-notification-bottom-split {
@@ -215,7 +215,7 @@ onUnmounted(() => {
     width: 100%;
     height: 1px;
     margin-top: 15px;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: var(--uikit-color-black-1);
   }
 
   .invitation-notification-bottom-container {
@@ -227,8 +227,8 @@ onUnmounted(() => {
     .invitation-notification-bottom {
       font-size: 14px;
       font-weight: 500;
-      color: rgba(143, 154, 178, 1);
       cursor: pointer;
+      color: var(--text-color-secondary);
     }
   }
 
@@ -246,9 +246,9 @@ onUnmounted(() => {
     overflow: hidden;
     font-size: 20px;
     font-weight: 500;
-    color: rgba(34, 38, 46, 1);
     text-overflow: ellipsis;
     white-space: nowrap;
+    color: var(--text-color-primary);
   }
 
   .button-text {

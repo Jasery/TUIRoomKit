@@ -50,12 +50,13 @@
       </div>
       <template #footer>
         <span>
-          <tui-button
-            class="dialog-button"
-            size="default"
+          <TUIButton
             @click="copyRoomIdAndRoomLink()"
-            >{{ t('Copy the conference number and link') }}
-          </tui-button>
+            type="primary"
+            style="min-width: 88px"
+          >
+            {{ t('Copy the conference number and link') }}
+          </TUIButton>
         </span>
       </template>
     </Dialog>
@@ -65,7 +66,7 @@
 <script setup lang="ts">
 import useRoomInviteControl from './useRoomInviteHooks';
 import SvgIcon from '../common/base/SvgIcon.vue';
-import TuiButton from '../common/base/Button.vue';
+import { TUIButton } from '@tencentcloud/uikit-base-component-vue3';
 import Contacts from '../ScheduleConference/Contacts.vue';
 import SuccessIcon from '../common/icons/SuccessIcon.vue';
 import copyIcon from '../common/icons/CopyIcon.vue';
@@ -97,9 +98,9 @@ const {
   justify-content: center;
   width: 100px;
   padding: 5px 10px;
-  background-color: var(--background-color-2);
   border-radius: 15px;
-  box-shadow: 0 -8px 30px var(--footer-shadow-color);
+  background-color: var(--bg-color-dialog);
+  box-shadow: 0 -8px 30px var(--uikit-color-black-8);
 
   .invite-item {
     display: flex;
@@ -136,7 +137,7 @@ const {
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
-    color: #4f586b;
+    color: var(--text-color-secondary);
 
     .invite-member-title {
       flex-basis: 18%;
@@ -154,17 +155,9 @@ const {
       width: 20px;
       height: 20px;
       margin-left: 8px;
-      color: var(--active-color-1);
       cursor: pointer;
+      color: var(--text-color-link);
     }
   }
-}
-
-.tui-theme-black .invite-container {
-  --hover-bg-color: rgba(79, 88, 107, 0.2);
-}
-
-.tui-theme-white .invite-container {
-  --hover-bg-color: rgba(213, 224, 242, 0.3);
 }
 </style>

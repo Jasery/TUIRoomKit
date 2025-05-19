@@ -27,20 +27,20 @@
             }}</span>
           </div>
           <div class="control-container">
-            <tui-button
-              size="default"
-              class="agree"
+            <TUIButton
               @click="handleUserApply(item.userId, true)"
+              type="primary"
+              style="min-width: 88px"
             >
               {{ t('Agree to the stage') }}
-            </tui-button>
-            <tui-button
-              size="default"
-              class="reject"
+            </TUIButton>
+            <TUIButton
               @click="handleUserApply(item.userId, false)"
+              type="primary"
+              style="min-width: 88px"
             >
               {{ t('Reject') }}
-            </tui-button>
+            </TUIButton>
           </div>
         </div>
       </div>
@@ -51,21 +51,22 @@
         }}</span>
       </div>
       <template #footer>
-        <tui-button
-          size="default"
+        <TUIButton
           :disabled="applyToAnchorUserCount === 0"
           @click="handleAllUserApply(true)"
+          type="primary"
+          style="min-width: 88px"
         >
           {{ t('Agree All') }}
-        </tui-button>
-        <tui-button
-          class="cancel-button"
-          size="default"
+        </TUIButton>
+        <TUIButton
           :disabled="applyToAnchorUserCount === 0"
           @click="handleAllUserApply(false)"
+          type="primary"
+          style="min-width: 88px"
         >
           {{ t('Reject All') }}
-        </tui-button>
+        </TUIButton>
       </template>
     </Dialog>
   </div>
@@ -77,7 +78,7 @@ import useMasterApplyControl from '../../../../hooks/useMasterApplyControl';
 import Avatar from '../../../common/Avatar.vue';
 import Dialog from '../../../common/base/Dialog';
 import SvgIcon from '../../../common/base/SvgIcon.vue';
-import TuiButton from '../../../common/base/Button.vue';
+import { TUIButton } from '@tencentcloud/uikit-base-component-vue3';
 import { roomService } from '../../../../services';
 
 const {
@@ -98,14 +99,6 @@ const {
 
 .cancel-button {
   margin-left: 10px;
-  color: #4f586b;
-  background-color: #f0f3fa;
-  border: 1px solid #f0f3fa;
-
-  &:hover {
-    background-color: #f0f3fa;
-    border: 1px solid #f0f3fa;
-  }
 }
 
 .apply-list {
@@ -121,7 +114,7 @@ const {
     display: flex;
     justify-content: space-between;
     padding-bottom: 10px;
-    border-bottom: 1px solid #f0f3fa;
+    border-bottom: 1px solid var(--stroke-color-module);
 
     .apply-list-name,
     .apply-list-operate {
@@ -130,7 +123,7 @@ const {
       font-style: normal;
       font-weight: 500;
       line-height: 22px;
-      color: #4f586b;
+      color: var(--text-color-secondary);
     }
   }
 
@@ -140,7 +133,7 @@ const {
     justify-content: space-between;
     height: 48px;
     margin-top: 8px;
-    border-bottom: 1px solid #f0f3fa;
+    border-bottom: 1px solid var(--stroke-color-module);
 
     .user-info {
       display: flex;
@@ -161,27 +154,15 @@ const {
         font-size: 14px;
         font-weight: 400;
         line-height: 22px;
-        color: #4f586b;
         text-overflow: ellipsis;
         white-space: nowrap;
+        color: var(--text-color-secondary);
       }
     }
 
     .control-container {
       display: flex;
       justify-content: space-between;
-
-      .agree,
-      .reject {
-        padding: 2px 12px;
-      }
-
-      .reject {
-        margin-left: 8px;
-        color: #4f586b;
-        background-color: #f0f3fa;
-        border: 1px solid #f0f3fa;
-      }
     }
   }
 }
@@ -199,7 +180,7 @@ const {
     font-style: normal;
     font-weight: 400;
     line-height: 22px;
-    color: #8f9ab2;
+    color: var(--uikit-color-gray-light-5);
   }
 }
 </style>

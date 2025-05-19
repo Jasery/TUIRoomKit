@@ -8,9 +8,7 @@
     </div>
     <div v-if="isZH" class="more-item">
       <div class="item-title">{{ t('Join our product discussion group') }}</div>
-      <tui-button class="join-button" type="primary" @click="handleClick">
-        {{ t('Join now') }}
-      </tui-button>
+      <TUIButton @click="handleClick">{{ t('Join now') }}</TUIButton>
     </div>
     <div class="more-item">
       <div class="item-title">{{ t('Our email address') }}</div>
@@ -21,11 +19,11 @@
 </template>
 
 <script setup lang="ts">
+import { TUIButton } from '@tencentcloud/uikit-base-component-vue3';
 import useRoomMoreControl from './useRoomMoreHooks';
 import SvgIcon from '../common/base/SvgIcon.vue';
 import CopyIcon from '../common/icons/CopyIcon.vue';
 import EmailIcon from '../common/icons/EmailIcon.vue';
-import TuiButton from '../common/base/Button.vue';
 
 const { t, onCopy, handleClick, email, isZH } = useRoomMoreControl();
 </script>
@@ -38,7 +36,7 @@ const { t, onCopy, handleClick, email, isZH } = useRoomMoreControl();
     display: flex;
 
     .email-icon {
-      color: #7c85a6;
+      color: var(--uikit-color-gray-7);
     }
 
     .more-notice {
@@ -48,7 +46,7 @@ const { t, onCopy, handleClick, email, isZH } = useRoomMoreControl();
       font-size: 14px;
       font-weight: 400;
       line-height: 22px;
-      color: var(--font-color-5);
+      color: var(--text-color-primary);
     }
   }
 
@@ -66,12 +64,7 @@ const { t, onCopy, handleClick, email, isZH } = useRoomMoreControl();
         font-size: 14px;
         font-weight: 400;
         line-height: 22px;
-        color: var(--font-color-5);
-      }
-
-      .join-button {
-        height: 42px;
-        font-weight: 600;
+        color: var(--text-color-primary);
       }
 
       .more-content {
@@ -85,14 +78,14 @@ const { t, onCopy, handleClick, email, isZH } = useRoomMoreControl();
         font-size: 14px;
         font-weight: 500;
         line-height: 22px;
-        color: var(--font-color-6);
         text-overflow: ellipsis;
         white-space: nowrap;
-        background-color: var(--background-color-7);
-        border: 1px solid var(--border-color);
         border-radius: 8px;
         outline: none;
         transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+        color: var(--text-color-primary);
+        background-color: var(--bg-color-input);
+        border: 1px solid var(--stroke-color-module);
       }
 
       .copy-icon {
@@ -105,6 +98,7 @@ const { t, onCopy, handleClick, email, isZH } = useRoomMoreControl();
         width: 32px;
         height: 32px;
         cursor: pointer;
+        color: var(--text-color-link);
       }
     }
   }

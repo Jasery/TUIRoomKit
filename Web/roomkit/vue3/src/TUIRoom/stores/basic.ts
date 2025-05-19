@@ -51,7 +51,7 @@ interface BasicState {
   isRoomLinkVisible: boolean;
   isSchemeLinkVisible: boolean;
   isShowScreenShareAntiFraud: boolean;
-  isOpenMic: boolean;
+  isExperiencedAI: boolean;
   scene: SceneType;
   componentConfig: {
     InviteControl: {
@@ -102,14 +102,14 @@ export const useBasicStore = defineStore('basic', {
       delay: 0,
     },
     lang: getLanguage(),
-    defaultTheme: 'black',
+    defaultTheme: 'dark',
     isSupportSwitchTheme: true,
     showHeaderTool: true,
     shareLink: '',
     isRoomLinkVisible: !isElectron && !isWeChat,
     isSchemeLinkVisible: !isMobile,
     isShowScreenShareAntiFraud: false,
-    isOpenMic: false,
+    isExperiencedAI: false,
     componentConfig: {
       SwitchTheme: {
         visible: true,
@@ -190,6 +190,9 @@ export const useBasicStore = defineStore('basic', {
     setIsShowScreenShareAntiFraud(isShowScreenShareAntiFraud: boolean) {
       this.isShowScreenShareAntiFraud = isShowScreenShareAntiFraud;
     },
+    setIsExperiencedAI(isExperiencedAI: boolean) {
+      this.isExperiencedAI = isExperiencedAI;
+    },
     setBasicInfo(infoObj: any) {
       if (!infoObj) {
         return;
@@ -235,9 +238,6 @@ export const useBasicStore = defineStore('basic', {
     setLang(lang: string) {
       this.lang = lang;
     },
-    setIsOpenMic(isOpen: boolean) {
-      this.isOpenMic = isOpen;
-    },
     setScene(scene: SceneType) {
       this.scene = scene;
     },
@@ -260,8 +260,8 @@ export const useBasicStore = defineStore('basic', {
       this.isFrontCamera = true;
       this.showHeaderTool = true;
       this.shareLink = '';
-      this.isOpenMic = false;
       this.showRoomTool = false;
+      this.isExperiencedAI = false;
     },
   },
 });

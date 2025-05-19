@@ -11,7 +11,6 @@
             <span class="form-label">{{ t('Room Name') }}</span>
             <TuiInput
               v-model="form.roomName"
-              theme="white"
               class="form-value"
               :placeholder="t('please enter the room name')"
               maxlength=""
@@ -135,7 +134,7 @@
           <div class="form-item">
             <span class="form-label">{{ t('Encryption') }}</span>
             <div class="form-value flex-end">
-              <TuiSwitch theme="white" v-model="isShowPasswordInput" />
+              <TuiSwitch v-model="isShowPasswordInput" />
             </div>
           </div>
           <div v-if="isShowPasswordInput" class="form-item">
@@ -143,7 +142,6 @@
             <TuiInput
               :model-value="form.password"
               @input="form.password = $event"
-              theme="white"
               class="form-value"
               :placeholder="t('Enter 6-digit password')"
               maxlength="6"
@@ -156,27 +154,20 @@
           <div class="form-item">
             <span class="form-label">{{ t('Disable all audios') }}</span>
             <div class="form-value flex-end">
-              <TuiSwitch
-                theme="white"
-                v-model="form.isMicrophoneDisableForAllUser"
-              />
+              <TuiSwitch v-model="form.isMicrophoneDisableForAllUser" />
             </div>
           </div>
           <div class="form-item">
             <span class="form-label">{{ t('Disable all videos') }}</span>
             <div class="form-value flex-end">
-              <TuiSwitch
-                theme="white"
-                v-model="form.isCameraDisableForAllUser"
-              />
+              <TuiSwitch v-model="form.isCameraDisableForAllUser" />
             </div>
           </div>
         </div>
       </div>
       <div class="schedule-conference-footer">
-        <TuiButton
+        <TUIButton
           v-if="!isEditMode"
-          class="footer-button"
           :custom-style="{
             width: '100%',
             padding: '10px',
@@ -184,12 +175,13 @@
             borderRadius: '6px',
           }"
           @click="scheduleConference"
+          type="primary"
         >
           {{ t('Schedule') }}
-        </TuiButton>
-        <TuiButton
+        </TUIButton>
+        <TUIButton
           v-else
-          class="footer-button"
+          type="primary"
           @click="updateConferenceInfo"
           :custom-style="{
             width: '100%',
@@ -198,7 +190,7 @@
             borderRadius: '6px',
           }"
           >{{ t('Save') }}
-        </TuiButton>
+        </TUIButton>
       </div>
     </PanelContainer>
     <Contacts
@@ -225,7 +217,7 @@ import { useI18n } from '../../../locales';
 import TuiInput from '../../common/base/Input';
 import TuiSelect from '../../common/base/Select';
 import TuiOption from '../../common/base/Option';
-import TuiButton from '../../common/base/Button.vue';
+import { TUIButton } from '@tencentcloud/uikit-base-component-vue3';
 import TuiAvatar from '../../common/Avatar.vue';
 import TuiDatepicker from '../../common/base/Datepicker';
 import TuiTimepicker from '../../common/base/Timepicker';
@@ -664,8 +656,8 @@ const updateConferenceInfo = async () => {
     flex-direction: column;
     gap: 10px;
     padding: 16px 5%;
-    background-color: #fff;
     border-radius: 8px;
+    background-color: var(--bg-color-operate);
   }
 
   .form-item {
@@ -678,7 +670,7 @@ const updateConferenceInfo = async () => {
       min-width: 100px;
       font-size: 14px;
       font-weight: 400;
-      color: #4f586b;
+      color: var(--text-color-primary);
     }
 
     .form-value {
@@ -690,7 +682,7 @@ const updateConferenceInfo = async () => {
       font-size: 14px;
       font-weight: 400;
       line-height: 42px;
-      color: #0f1014;
+      color: var(--text-color-primary);
 
       .search-user {
         height: 42px;
@@ -709,7 +701,7 @@ const updateConferenceInfo = async () => {
         }
 
         &-item:hover {
-          color: #409eff;
+          color: var(--uikit-color-theme-5);
         }
       }
 
@@ -730,7 +722,7 @@ const updateConferenceInfo = async () => {
       }
 
       .select-attendees:hover {
-        color: var(--active-color-1);
+        color: var(--text-color-link);
       }
 
       .select-search-result-item {
@@ -761,7 +753,7 @@ const updateConferenceInfo = async () => {
           padding: 2px 8px;
           overflow: hidden;
           line-height: normal;
-          background-color: #e3f0fd;
+          background-color: var(--bg-color-bubble-own);
           border-radius: 4px;
 
           &-container {
@@ -788,7 +780,7 @@ const updateConferenceInfo = async () => {
 
           &-remove {
             margin-left: auto;
-            color: #b3acac;
+            color: var(--uikit-color-gray-7);
             cursor: pointer;
           }
         }
@@ -826,12 +818,6 @@ const updateConferenceInfo = async () => {
   align-items: center;
   justify-content: center;
   width: 100%;
-
-  .footer-button {
-    width: 100%;
-    margin-top: 10px;
-    border-radius: 6px;
-  }
 }
 
 .invite-member {
@@ -840,7 +826,7 @@ const updateConferenceInfo = async () => {
   gap: 20px;
 
   .invite-member-title {
-    color: #4f586b;
+    color: var(--text-color-secondary);
   }
 
   .invite-member-item {
@@ -848,9 +834,9 @@ const updateConferenceInfo = async () => {
     justify-content: space-between;
     padding: 10px 16px;
     margin-top: 8px;
-    color: #0f1014;
-    background: #f9fafc;
-    border: 1px solid #e4e8ee;
+    color: var(--text-color-primary);
+    background: var(--uikit-color-white-2);
+    border: 1px solid var(--uikit-color-white-2);
     border-radius: 8px;
 
     .copy {

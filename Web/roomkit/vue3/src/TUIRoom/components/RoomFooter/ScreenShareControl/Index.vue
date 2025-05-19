@@ -27,16 +27,18 @@
       </span>
       <template #footer>
         <span>
-          <tui-button size="default" @click="startScreenShare">{{
-            t('Continue sharing')
-          }}</tui-button>
-          <tui-button
-            class="button"
+          <TUIButton
+            @click="startScreenShare"
             type="primary"
-            size="default"
+            style="min-width: 88px"
+          >
+            {{ t('Continue sharing') }}
+          </TUIButton>
+          <TUIButton
             @click="isShowFraudDialog = false"
+            style="min-width: 88px"
             >{{ t('Cancel') }}
-          </tui-button>
+          </TUIButton>
         </span>
       </template>
     </Dialog>
@@ -57,16 +59,19 @@
       </span>
       <template #footer>
         <span>
-          <tui-button size="default" @click="stopScreenShare">{{
-            t('End sharing')
-          }}</tui-button>
-          <tui-button
-            class="button"
+          <TUIButton
+            @click="stopScreenShare"
             type="primary"
-            size="default"
+            style="min-width: 88px"
+          >
+            {{ t('End sharing') }}
+          </TUIButton>
+          <TUIButton
+            class="button"
             @click="cancelStop"
+            style="min-width: 88px"
             >{{ t('Cancel') }}
-          </tui-button>
+          </TUIButton>
         </span>
       </template>
     </Dialog>
@@ -75,6 +80,7 @@
 
 <script setup lang="ts">
 import { ref, Ref, computed, onUnmounted, watch } from 'vue';
+import { TUIButton } from '@tencentcloud/uikit-base-component-vue3';
 import { storeToRefs } from 'pinia';
 import TUIMessage from '../../common/base/Message/index';
 import Dialog from '../../common/base/Dialog';
@@ -88,7 +94,6 @@ import { useBasicStore } from '../../../stores/basic';
 import logger from '../../../utils/common/logger';
 import { MESSAGE_DURATION } from '../../../constants/message';
 import { useI18n } from '../../../locales';
-import TuiButton from '../../common/base/Button.vue';
 import eventBus from '../../../hooks/useMitt';
 import { isScreenShareSupported } from '../../../utils/mediaAbility';
 import { roomService } from '../../../services';
@@ -282,20 +287,16 @@ onUnmounted(() => {
   width: 131px;
   height: 48px;
   font-size: 14px;
-  color: var(--color-font);
   cursor: pointer;
-  background: var(--stop-share-region-bg-color);
   border-radius: 4px;
   transform: translateX(-50%);
+  color: var(--text-color-primary);
+  background-color: var(--bg-color-operate);
 }
 
 .stop-share-icon {
   width: 24px;
   height: 24px;
   margin-right: 10px;
-}
-
-.button {
-  margin-left: 12px;
 }
 </style>

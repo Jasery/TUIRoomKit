@@ -5,13 +5,9 @@
         <svg-icon :icon="ScreenSharingIcon" />
         <span class="text">{{ t('You are sharing the screen...') }}</span>
       </div>
-      <tui-button
-        size="default"
-        class="stop-button"
-        @click="openStopConfirmDialog"
-      >
+      <TUIButton color="red" @click="openStopConfirmDialog" type="primary">
         {{ t('End sharing') }}
-      </tui-button>
+      </TUIButton>
       <Dialog
         v-model="showStopShareRegion"
         width="420px"
@@ -29,20 +25,19 @@
         </span>
         <template #footer>
           <span>
-            <tui-button
-              class="dialog-button"
-              size="default"
+            <TUIButton
               @click="stopScreenSharing"
+              type="primary"
+              style="min-width: 88px"
             >
               {{ t('End sharing') }}
-            </tui-button>
-            <tui-button
-              type="primary"
-              size="default"
+            </TUIButton>
+            <TUIButton
               @click="showStopShareRegion = false"
+              style="min-width: 88px"
             >
               {{ t('Cancel') }}
-            </tui-button>
+            </TUIButton>
           </span>
         </template>
       </Dialog>
@@ -54,7 +49,7 @@
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import SvgIcon from '../../../common/base/SvgIcon.vue';
 import ScreenSharingIcon from '../../../common/icons/ScreenSharingIcon.vue';
-import TuiButton from '../../../common/base/Button.vue';
+import { TUIButton } from '@tencentcloud/uikit-base-component-vue3';
 import Dialog from '../../../common/base/Dialog';
 import eventBus from '../../../../hooks/useMitt';
 import { useI18n } from '../../../../locales';
@@ -89,13 +84,13 @@ onBeforeUnmount(() => {
   justify-content: center;
   width: 100%;
   height: 100%;
-  background-color: var(--background-color-1);
+  background-color: var(--bg-color-bubble-reciprocal);
 
   &::before {
     width: 100%;
     height: 100%;
     content: '';
-    background-color: var(--local-screen-stream-bg-color);
+    background-color: var(--bg-color-bubble-reciprocal);
   }
 
   .local-screen-control-container {
@@ -105,8 +100,8 @@ onBeforeUnmount(() => {
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: var(--screen-font-color);
     transform: translate(-50%, -50%);
+    color: var(--text-color-tertiary);
 
     &.mini {
       transform: translate(-50%, -50%) scale(0.7);
@@ -125,26 +120,6 @@ onBeforeUnmount(() => {
         white-space: nowrap;
       }
     }
-
-    .stop-button {
-      margin-top: 30px;
-      background-color: var(--red-color-3);
-      border: 1.5px solid var(--red-color-3);
-    }
   }
-}
-
-.tui-theme-white .local-screen-container {
-  --local-screen-stream-bg-color: rgba(228, 232, 238, 0.4);
-  --screen-font-color: #8f9ab2;
-}
-
-.tui-theme-black .local-screen-container {
-  --screen-font-color: #b2bbd1;
-  --local-screen-stream-bg-color: rgba(34, 38, 46, 0.5);
-}
-
-.dialog-button {
-  margin-right: 12px;
 }
 </style>

@@ -96,18 +96,6 @@ onUnmounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.tui-theme-white .message-body {
-  --user-chat-color: rgba(213, 224, 242, 0.4);
-  --user-font-color: var(--black-color);
-  --host-font-color: var(--white-color);
-}
-
-.tui-theme-black .message-body {
-  --user-chat-color: rgba(213, 224, 242, 0.1);
-  --user-font-color: var(--background-color-4);
-  --host-font-color: var(--background-color-4);
-}
-
 .message-list-container {
   flex: 1;
   height: 100%;
@@ -157,7 +145,7 @@ onUnmounted(() => {
       font-size: 14px;
       font-weight: 400;
       line-height: 22px;
-      color: var(--font-color-8);
+      color: var(--text-color-warning);
       text-overflow: ellipsis;
       white-space: nowrap;
     }
@@ -220,6 +208,8 @@ onUnmounted(() => {
         color: #333333;
         background-color: #ceeee5;
           border-radius: 8px;
+          background-color: var(--bg-color-bubble-own);
+          color: var(--text-color-primary);
         }
       }
 
@@ -234,6 +224,7 @@ onUnmounted(() => {
         color: #999999;
         text-overflow: ellipsis;
         white-space: nowrap;
+        color: var(--text-color-warning);
       }
 
       .message-body {
@@ -244,6 +235,8 @@ onUnmounted(() => {
         color: #333333;
         background-color: #ffffff;
         border-radius: 8px;
+        background-color: var(--bg-color-bubble-reciprocal);
+        color: var(--text-color-primary);
       }
     }
   }

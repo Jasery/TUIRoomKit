@@ -1,13 +1,16 @@
 <template>
   <div class="footer-container">
     <div class="left-container">
-      <audio-control
+      <audio-setting
         v-if="!isAudience || isAdmin"
+        :display-mode="MediaSettingDisplayMode.IconWithPanel"
         class="left-container-item"
         @click="handleControlClick('audioControl')"
       />
-      <video-control
+      <video-setting
         v-if="!isAudience || isAdmin"
+        :display-mode="MediaSettingDisplayMode.IconWithPanel"
+        :support-video-preview="false"
         class="left-container-item"
         @click="handleControlClick('videoControl')"
       />
@@ -70,11 +73,14 @@
 </template>
 
 <script setup lang="ts">
-import AudioControl from '../AudioControl.vue';
+import {
+  AudioSetting,
+  VideoSetting,
+  MediaSettingDisplayMode,
+} from '../../../core';
 import ScreenShareControl from '../ScreenShareControl/Index.vue';
 import FullScreenControl from '../FullScreenControl.vue';
 import InviteControl from '../InviteControl.vue';
-import VideoControl from '../VideoControl.vue';
 import ManageMemberControl from '../ManageMemberControl.vue';
 import ChatControl from '../ChatControl.vue';
 import MasterApplyControl from '../ManageStageControl.vue';
@@ -108,8 +114,8 @@ function handleControlClick(name: string) {
   padding: 0.7rem 0;
   padding-right: 24px;
   padding-left: 9px;
-  background-color: var(--background-color-2);
-  box-shadow: 0 -8px 30px var(--footer-shadow-color);
+  background-color: var(--bg-color-topbar);
+  box-shadow: 0 -8px 30px var(--uikit-color-black-8);
 
   .left-container {
     display: flex;

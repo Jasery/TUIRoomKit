@@ -46,30 +46,37 @@
       v-if="!isGeneralUser && currentActiveTabName !== USERS_STATUS.NOT_ENTER"
       class="global-setting"
     >
-      <tui-button
-        class="button"
-        size="default"
+      <TUIButton
+        type="primary"
+        color="gray"
         @click="toggleManageAllMember(ManageControlType.AUDIO)"
+        style="min-width: 118px"
       >
         {{ audioManageInfo }}
-      </tui-button>
-      <tui-button
-        class="button"
-        size="default"
+      </TUIButton>
+      <TUIButton
+        type="primary"
+        color="gray"
         @click="toggleManageAllMember(ManageControlType.VIDEO)"
+        style="min-width: 118px"
       >
         {{ videoManageInfo }}
-      </tui-button>
+      </TUIButton>
       <div class="more-container" v-click-outside="handleShowMoreControl">
-        <tui-button class="button" size="default" @click="toggleClickMoreBtn">
+        <TUIButton
+          @click="toggleClickMoreBtn"
+          color="gray"
+          type="primary"
+          style="min-width: 108px"
+        >
           {{ t('More') }}
           <svg-icon
             size="12"
             :class="['more-arrow', showMoreControl ? 'up' : 'down']"
             :icon="ArrowUpIcon"
           />
-        </tui-button>
-        <div v-show="showMoreControl" :class="['tui-theme-white', 'drop-down']">
+        </TUIButton>
+        <div v-show="showMoreControl" class="drop-down">
           <div
             v-for="item in moreControlList"
             :key="item.type"
@@ -86,14 +93,14 @@
       v-if="currentActiveTabName === USERS_STATUS.NOT_ENTER"
       class="global-setting"
     >
-      <tui-button
+      <TUIButton
         v-if="filteredUserStatusList.length > 0"
-        class="button-bottom"
-        size="default"
+        type="primary"
         @click="handleCallAllInvitee"
+        :style="{ minWidth: '80%' }"
       >
         {{ t('Call all') }}
-      </tui-button>
+      </TUIButton>
     </div>
     <Dialog
       v-model="showManageAllUserDialog"
@@ -106,17 +113,18 @@
         {{ dialogContent }}
       </span>
       <template #footer>
-        <tui-button size="default" @click="doToggleManageAllMember">{{
-          t('Confirm')
-        }}</tui-button>
-        <tui-button
-          class="cancel-button"
-          size="default"
+        <TUIButton
+          @click="doToggleManageAllMember"
           type="primary"
+          style="min-width: 88px"
+          >{{ t('Confirm') }}
+        </TUIButton>
+        <TUIButton
           @click="showManageAllUserDialog = false"
+          style="min-width: 88px"
         >
           {{ t('Cancel') }}
-        </tui-button>
+        </TUIButton>
       </template>
     </Dialog>
   </div>
@@ -131,7 +139,7 @@ import ApplyTipsIcon from '../common/icons/ApplyTipsIcon.vue';
 import Dialog from '../common/base/Dialog';
 import { useRoomStore } from '../../stores/room';
 import useIndex from './useIndexHooks';
-import TuiButton from '../common/base/Button.vue';
+import { TUIButton } from '@tencentcloud/uikit-base-component-vue3';
 import ArrowUpIcon from '../common/icons/ArrowUpIcon.vue';
 import vClickOutside from '../../directives/vClickOutside';
 import { USERS_STATUS } from '../../constants/room';
@@ -174,6 +182,7 @@ const handleShowMoreControl = () => {
 .more-container {
   position: relative;
   display: flex;
+  margin-left: 16px;
 
   .more-arrow {
     margin-left: 2px;
@@ -189,17 +198,19 @@ const handleShowMoreControl = () => {
     bottom: 40px;
     z-index: 1;
     padding: 8px 7px;
-    background: var(--background-color-1);
     border-radius: 8px;
-    box-shadow: var(--operation-box-shadow);
+    background-color: var(--dropdown-color-default);
+    box-shadow:
+      0px 3px 8px var(--uikit-color-black-8),
+      0px 6px 40px var(--uikit-color-black-8);
 
     .user-operate-item {
       display: flex;
       align-items: center;
       height: 20px;
       margin: 5px 7px;
-      color: var(--operation-font-color);
       cursor: pointer;
+      color: var(--text-color-secondary);
 
       .operate-text {
         margin-left: 8px;
@@ -211,27 +222,6 @@ const handleShowMoreControl = () => {
       }
     }
   }
-}
-
-.tui-theme-black .search-container {
-  --background-color: rgba(79, 88, 107, 0.3);
-  --font-color: #636a7e;
-}
-
-.tui-theme-white .search-container {
-  --background-color: var(--background-color-3);
-  --font-color: var(--font-color-1);
-}
-
-.tui-theme-black .more-container {
-  --operation-font-color: #6b758a;
-  --operation-box-shadow: 0px 3px 8px rgba(34, 38, 46, 0.3),
-    0px 6px 40px rgba(34, 38, 46, 0.3);
-}
-
-.tui-theme-white .more-container {
-  --operation-font-color: #6b758a;
-  --operation-box-shadow: 0px 3px 8px #e9f0fb, 0px 6px 40px rgba(0, 0, 0, 0.1);
 }
 
 .manage-member-container {
@@ -251,18 +241,18 @@ const handleShowMoreControl = () => {
       align-items: center;
       height: 32px;
       padding: 0 16px;
-      color: var(--font-color-1);
-      background-color: var(--background-color);
       border-radius: 16px;
+      background-color: var(--bg-color-input);
+      color: var(--text-color-primary);
 
       .search-input {
         width: 100%;
         margin-left: 8px;
         font-size: 14px;
-        color: var(--font-color-1);
         background: none;
         border: none;
         outline: none;
+        color: var(--text-color-primary);
       }
     }
   }
@@ -275,8 +265,8 @@ const handleShowMoreControl = () => {
     height: 36px;
     margin: 16px 20px 0;
     cursor: pointer;
-    background-color: var(--background-color-11);
     border-radius: 20px;
+    background-color: var(--bg-color-input);
 
     .user-status {
       display: flex;
@@ -303,12 +293,12 @@ const handleShowMoreControl = () => {
     .apply-not-stage {
       font-size: 14px;
       font-weight: 400;
-      color: var(--font-color-1);
-      filter: drop-shadow(0 2px 4px rgba(32, 77, 141, 0.03))
-        drop-shadow(0 6px 10px rgba(32, 77, 141, 0.06))
-        drop-shadow(0 3px 14px rgba(32, 77, 141, 0.05));
+      filter: drop-shadow(0 2px 4px var(--uikit-color-black-8))
+        drop-shadow(0 6px 10px var(--uikit-color-black-8))
+        drop-shadow(0 3px 14px var(--uikit-color-black-8));
       border-radius: 20px;
       transform: translateX(4px);
+      color: var(--text-color-secondary);
     }
 
     .apply-not-stage {
@@ -320,7 +310,7 @@ const handleShowMoreControl = () => {
     }
 
     .apply-count-active {
-      background-color: var(--background-color-12);
+      background-color: var(--bg-color-operate);
     }
   }
 
@@ -332,10 +322,10 @@ const handleShowMoreControl = () => {
     width: 100%;
     height: 60px;
     padding: 0 20px 0 32px;
-    background-color: var(--background-color-8);
+    background-color: var(--bg-color-operate);
 
     .apply-icon {
-      color: var(--font-color-2);
+      color: var(--text-color-secondary);
     }
 
     .apply-info {
@@ -343,26 +333,16 @@ const handleShowMoreControl = () => {
       padding-left: 4px;
       font-size: 14px;
       font-weight: 400;
-      color: var(--font-color-8);
+      color: var(--text-color-secondary);
     }
 
     .apply-check {
       font-size: 14px;
       font-weight: 400;
       line-height: 32px;
-      color: var(--active-color-2);
       text-align: center;
       cursor: pointer;
-    }
-
-    &::after {
-      position: absolute;
-      bottom: 0;
-      left: 5%;
-      width: 90%;
-      height: 1px;
-      content: '';
-      background-color: var(--stroke-color-2);
+      color: var(--text-color-link);
     }
   }
 
@@ -382,13 +362,5 @@ const handleShowMoreControl = () => {
     margin: 20px 0;
     cursor: pointer;
   }
-
-  .button-bottom {
-    width: 80%;
-  }
-}
-
-.cancel-button {
-  margin-left: 12px;
 }
 </style>

@@ -28,12 +28,9 @@
     </div>
     <template #footer>
       <span>
-        <tui-button
-          class="dialog-button"
-          size="default"
-          @click="copyRoomIdAndRoomLink()"
-          >{{ t('Copy the conference number and link') }}
-        </tui-button>
+        <TUIButton @click="copyRoomIdAndRoomLink()" type="primary">
+          {{ t('Copy the conference number and link') }}
+        </TUIButton>
       </span>
     </template>
   </TuiDialog>
@@ -42,9 +39,9 @@
 <script setup lang="ts">
 import { ref, defineProps, watch, computed, defineEmits } from 'vue';
 import { storeToRefs } from 'pinia';
+import { TUIButton } from '@tencentcloud/uikit-base-component-vue3';
 import { useI18n } from '../../locales';
 import TuiDialog from '../common/base/Dialog';
-import TuiButton from '../common/base/Button.vue';
 import SuccessIcon from '../common/icons/SuccessIcon.vue';
 import { TUIConferenceInfo } from '@tencentcloud/tuiroom-engine-js';
 import copyIcon from '../common/icons/CopyIcon.vue';
@@ -142,7 +139,7 @@ watch(
   user-select: none;
 
   .invite-member-title {
-    color: #4f586b;
+    color: var(--text-color-primary);
   }
 
   .invite-member-item {
@@ -150,10 +147,10 @@ watch(
     justify-content: space-between;
     padding: 10px 16px;
     margin-top: 8px;
-    color: #0f1014;
-    background: #f9fafc;
-    border: 1px solid #e4e8ee;
     border-radius: 8px;
+    background-color: var(--bg-color-input);
+    color: var(--text-color-primary);
+    border: 1px solid var(--stroke-color-module);
 
     .invite-member-content {
       max-width: 400px;
@@ -166,6 +163,7 @@ watch(
       width: 20px;
       height: 20px;
       cursor: pointer;
+      color: var(--text-color-link);
     }
   }
 }

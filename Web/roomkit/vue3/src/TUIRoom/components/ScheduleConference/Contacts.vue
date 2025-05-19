@@ -93,16 +93,14 @@
           </div>
         </div>
         <div class="chosen-footer">
-          <TuiButton
-            class="chosen-footer-button"
+          <TUIButton @click="cancel" style="min-width: 88px">{{ t('Cancel') }}</TUIButton>
+          <TUIButton
+            @click="confirm"
             type="primary"
-            @click="cancel"
+            style="min-width: 88px"
           >
-            {{ t('Cancel') }}
-          </TuiButton>
-          <TuiButton class="chosen-footer-button" @click="confirm">{{
-            t('Confirm')
-          }}</TuiButton>
+            {{ t('Confirm') }}
+          </TUIButton>
         </div>
       </div>
     </div>
@@ -114,9 +112,14 @@
             {{ t('x people selected', { number: selectedContacts.length }) }}
           </span>
         </div>
-        <TuiButton :disabled="!selectedContacts.length" @click="confirm">
+        <TUIButton
+          :disabled="!selectedContacts.length"
+          @click="confirm"
+          type="primary"
+          style="min-width: 88px"
+        >
           {{ t('Confirm') + `(${selectedContacts.length})` }}
-        </TuiButton>
+        </TUIButton>
       </div>
     </template>
   </PanelContainer>
@@ -131,9 +134,9 @@ import {
   computed,
   withDefaults,
 } from 'vue';
+import { TUIButton } from '@tencentcloud/uikit-base-component-vue3';
 import TuiInput from '../common/base/Input';
 import TuiCheckbox from '../common/base/Checkbox';
-import TuiButton from '../common/base/Button.vue';
 import TuiAvatar from '../common/Avatar.vue';
 import SearchIcon from '../common/icons/SearchIcon.vue';
 import CloseIcon from '../common/icons/CloseIcon.vue';
@@ -309,25 +312,25 @@ watch(
         min-width: 10px;
         margin-right: 10px;
         margin-left: auto;
-        color: #6b758a;
+        color: var(--uikit-color-gray-5);
         cursor: pointer;
       }
     }
 
     &-item:hover {
-      background-color: #ecf5ff;
+      background-color: var(--list-color-hover);
     }
   }
 
   .contact {
     width: 50%;
     padding-right: 1rem;
-    border-right: 1px solid #e5e5e5;
+    border-right: 1px solid var(--stroke-color-module);
 
     .contact-search {
       &-input.focus {
         .search-icon {
-          color: var(--active-color-1);
+          color: var(--text-color-link);
         }
       }
     }
@@ -343,6 +346,17 @@ watch(
         font-size: 12px;
         text-align: center;
       }
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background-color: var(--stroke-color-secondary);
     }
   }
 
@@ -360,11 +374,6 @@ watch(
       display: flex;
       gap: 10px;
       justify-content: center;
-
-      .chosen-footer-button {
-        width: 76px;
-        height: 26px;
-      }
     }
   }
 }
@@ -397,7 +406,7 @@ watch(
       &-item {
         height: 46px;
         line-height: 46px;
-        border-bottom: 1px solid rgba(221, 226, 235, 0.3);
+        border-bottom: 1px solid var(--stroke-color-primary);
       }
     }
   }
@@ -413,15 +422,11 @@ watch(
   .chosen-member {
     font-size: 14px;
     font-weight: 400;
-    color: #22262e;
+    color: var(--text-color-secondary);
   }
 
   .form-attendees:hover {
     overflow: auto;
-  }
-
-  button {
-    padding: 6px 30px;
   }
 }
 </style>

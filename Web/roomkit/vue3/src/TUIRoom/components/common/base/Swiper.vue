@@ -201,7 +201,7 @@ function handleMouseEnd(event: MouseEvent) {
       width: 8px;
       height: 8px;
       margin: 5px;
-      background: #fff;
+      background-color: var(--uikit-color-white-1);
       border-radius: 20px;
       opacity: 0.6;
     }
@@ -210,7 +210,7 @@ function handleMouseEnd(event: MouseEvent) {
       width: 8px;
       height: 8px;
       margin: 5px;
-      background: #fff;
+      background-color: var(--uikit-color-white-1);
       border-radius: 20px;
       opacity: 1;
     }

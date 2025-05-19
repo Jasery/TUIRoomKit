@@ -51,16 +51,17 @@
         </div>
       </div>
       <div class="footer">
-        <TuiButton
-          class="button"
+        <TUIButton
           :disabled="!isAllowed"
           @click="confirmVirtualBackground"
+          type="primary"
+          style="min-width: 88px"
         >
           {{ t('Save') }}
-        </TuiButton>
-        <TuiButton class="button" type="primary" @click="closeSettingPanel">{{
+        </TUIButton>
+        <TUIButton @click="closeSettingPanel" style="min-width: 88px">{{
           t('Cancel')
-        }}</TuiButton>
+        }}</TUIButton>
       </div>
     </Dialog>
   </div>
@@ -68,6 +69,7 @@
 
 <script setup lang="ts">
 import { computed, nextTick, ref } from 'vue';
+import { TUIButton } from '@tencentcloud/uikit-base-component-vue3';
 import IconButton from '../common/base/IconButton.vue';
 import VirtualBackgroundIcon from '../common/icons/VirtualBackgroundIcon.vue';
 import { useI18n } from '../../locales';
@@ -75,7 +77,6 @@ import { roomService } from '../../services';
 import Dialog from '../common/base/Dialog';
 import CloseVirtualBackground from '../../assets/imgs/close-virtual-background.png';
 import BlurredBackground from '../../assets/imgs/blurred-background.png';
-import TuiButton from '../common/base/Button.vue';
 
 const { t } = useI18n();
 const componentConfig =
@@ -139,8 +140,8 @@ const applyVirtualBackground = async (type: 'close' | 'blur') => {
   justify-content: center;
   min-height: 310px;
   overflow: hidden;
-  background-color: #000;
   border-radius: 8px;
+  background-color: var(--uikit-color-black-1);
 }
 
 .setting {
@@ -149,19 +150,19 @@ const applyVirtualBackground = async (type: 'close' | 'blur') => {
   align-items: center;
   padding: 1rem;
   margin-top: 10px;
-  border: 1px solid #e4e8ee;
   border-radius: 8px;
+  border: 1px solid var(--stroke-color-primary);
 
   &-item {
     display: flex;
     flex-direction: column;
     justify-content: center;
     font-size: 12px;
-    color: #4f586b;
     text-align: center;
     cursor: pointer;
     border: 1px solid transparent;
     border-radius: 8px;
+    color: var(--text-color-secondary);
 
     &-icon {
       display: flex;
@@ -170,15 +171,16 @@ const applyVirtualBackground = async (type: 'close' | 'blur') => {
       width: 54px;
       height: 54px;
       overflow: hidden;
-      background-color: #f0f3fa;
       border-radius: 8px;
+      background-color: var(--bg-color-dialog);
+      border: 1px solid var(--stroke-color-primary);
     }
   }
 
   &-item.active {
-    color: #fff;
-    background-color: #1c66e5;
-    border: 1px solid #1c66e5;
+    color: var(--text-color-button);
+    background-color: var(--button-color-primary-default);
+    border: 1px solid var(--button-color-primary-default);
   }
 }
 
@@ -189,8 +191,8 @@ const applyVirtualBackground = async (type: 'close' | 'blur') => {
   z-index: 3;
   width: 40px;
   height: 40px;
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #1c66e5;
+  border: 4px solid var(--uikit-color-white-2);
+  border-top: 4px solid var(--text-color-link);
   border-radius: 50%;
   transform: translate(-50%, -50%);
   animation: spin 1s linear infinite;
@@ -201,7 +203,7 @@ const applyVirtualBackground = async (type: 'close' | 'blur') => {
   z-index: 2;
   width: 100%;
   height: 100%;
-  background-color: #000;
+  background-color: var(--uikit-color-black-1);
 }
 
 @keyframes spin {
@@ -222,10 +224,5 @@ const applyVirtualBackground = async (type: 'close' | 'blur') => {
   padding: 1rem;
   margin-top: 10px;
   border-radius: 8px;
-
-  .button {
-    width: 84px;
-    height: 32px;
-  }
 }
 </style>

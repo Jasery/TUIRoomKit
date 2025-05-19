@@ -8,6 +8,7 @@ import useGetRoomEngine from '../../../hooks/useRoomEngine';
 import TUIRoomEngine, {
   TUIRole,
   TUIRoomEvents,
+  TUIUserInfo,
 } from '@tencentcloud/tuiroom-engine-js';
 import logger from '../../../utils/common/logger';
 import TUIMessage from '../../common/base/Message/index';
@@ -136,40 +137,20 @@ export default function useEndControl() {
     }
   }
 
-  const onUserRoleChanged = async (eventInfo: {
-    userId: string;
-    userRole: TUIRole;
-  }) => {
-    const { userId, userRole } = eventInfo;
+  const onUserInfoChanged = async ({ userInfo }: { userInfo: TUIUserInfo }) => {
+    const { userId, userRole } = userInfo;
     const isLocal = roomStore.localUser.userId === userId;
     const oldUserRole = roomStore.getUserRole(userId);
+    if (oldUserRole === userRole) return;
     roomStore.updateUserInfo({ userId, userRole });
     switch (userRole) {
       case TUIRole.kGeneralUser:
         if (isLocal) {
-          if (
-            roomStore?.isMicrophoneDisableForAllUser &&
-            !roomStore.localStream?.hasAudioStream
-          ) {
-            roomStore.setCanControlSelfAudio(false);
-          }
-          if (
-            roomStore?.isCameraDisableForAllUser &&
-            !roomStore.localStream?.hasVideoStream
-          ) {
-            roomStore.setCanControlSelfVideo(false);
-          }
           if (oldUserRole === TUIRole.kAdministrator) {
             TUIMessage({
               type: 'warning',
               message: t('Your administrator status has been revoked'),
             });
-          }
-          if (roomStore.localStream?.hasAudioStream) {
-            roomStore.setCanControlSelfAudio(true);
-          }
-          if (roomStore.localStream?.hasVideoStream) {
-            roomStore.setCanControlSelfVideo(true);
           }
         }
         break;
@@ -179,8 +160,6 @@ export default function useEndControl() {
             type: 'success',
             message: t('You have become a administrator'),
           });
-          roomStore.setCanControlSelfAudio(true);
-          roomStore.setCanControlSelfVideo(true);
           if (roomStore.isSpeakAfterTakingSeatMode) {
             handleUpdateSeatApplicationList();
           }
@@ -215,7 +194,7 @@ export default function useEndControl() {
   };
 
   TUIRoomEngine.once('ready', () => {
-    roomEngine.instance?.on(TUIRoomEvents.onUserRoleChanged, onUserRoleChanged);
+    roomEngine.instance?.on(TUIRoomEvents.onUserInfoChanged, onUserInfoChanged);
   });
   const handleMount = () => {
     const { userRole } = roomService.roomStore.localUser;
@@ -229,8 +208,8 @@ export default function useEndControl() {
   roomService.lifeCycleManager.on('mount', handleMount);
   onUnmounted(() => {
     roomEngine.instance?.off(
-      TUIRoomEvents.onUserRoleChanged,
-      onUserRoleChanged
+      TUIRoomEvents.onUserInfoChanged,
+      onUserInfoChanged
     );
     roomService.lifeCycleManager.off('mount', handleMount);
   });
