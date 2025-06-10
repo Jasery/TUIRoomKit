@@ -69,7 +69,7 @@ const {
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #666666;
+      color: #676c80;
     }
 
     .content-bottom-input {
@@ -89,7 +89,8 @@ const {
       border: none;
       border-radius: 8px;
       /* background-color: var(--bg-color-input); */
-      color: var(--text-color-secondary);
+      /* color: var(--text-color-secondary); */
+      color: #676c80;
 
       ::placeholder {
         font-family: 'PingFang SC';
@@ -97,7 +98,10 @@ const {
         font-style: normal;
         font-weight: 400;
         line-height: 18px;
-        color: var(--text-color-secondary);
+        /* color: var(--text-color-secondary); */
+        color: #676c80;
+        
+
       }
 
       &:focus-visible {

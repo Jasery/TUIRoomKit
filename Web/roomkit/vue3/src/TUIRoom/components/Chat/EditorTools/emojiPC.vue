@@ -66,7 +66,7 @@ const handleClickOutsideEmojiToobar = () => {
     overflow-y: auto;
     background-color: #ffffff;
     border-radius: 8px;
-    background-color: var(--bg-color-function);
+    /* background-color: var(--bg-color-function); */
     box-shadow:
       0px 8px 40px 0px var(--uikit-color-black-8),
       0px 4px 12px 0px var(--uikit-color-black-8);

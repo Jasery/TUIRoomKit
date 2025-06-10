@@ -1,6 +1,6 @@
 {
   "name": "roomkit-web-vue3",
-  "version": "3.0.0",
+  "version": "3.0.0-beta3",
   "main": "./lib/index.js",
   "module": "./es/index.mjs",
   "types": "./es/index.d.ts",
