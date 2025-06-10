@@ -69,6 +69,7 @@ const {
       display: flex;
       align-items: center;
       justify-content: center;
+      color: #666666;
     }
 
     .content-bottom-input {
@@ -87,7 +88,7 @@ const {
       background-color: #ffffff;
       border: none;
       border-radius: 8px;
-      background-color: var(--bg-color-input);
+      /* background-color: var(--bg-color-input); */
       color: var(--text-color-secondary);
 
       ::placeholder {
